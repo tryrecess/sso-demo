@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Head from "next/head";
-import Script from "next/script";
+import ScriptLoader from "@/components/utils/ScriptLoader";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,17 +26,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <Script
-          src={process.env.NEXT_PUBLIC_RECESS_ISCRIPT_URL}
-          strategy="lazyOnload"
-        />
-      </Head>
-
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+
+        <ScriptLoader url={process.env.NEXT_PUBLIC_RECESS_ISCRIPT_URL!} />
       </body>
     </html>
   );
